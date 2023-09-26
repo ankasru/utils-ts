@@ -4,24 +4,24 @@ export function HTMLSwitcher ({ value, action = 'escape' }: { value: Nullable<st
     const HTMLEscapeValues = [
         {
             symbol: '&',
-            escapedSymbol: 'amp',
+            escapedSymbol: 'amp'
         },
         {
             symbol: '<',
-            escapedSymbol: 'lt',
+            escapedSymbol: 'lt'
         },
         {
             symbol: '>',
-            escapedSymbol: 'gt',
+            escapedSymbol: 'gt'
         },
         {
             symbol: '\'',
-            escapedSymbol: '#39',
+            escapedSymbol: '#39'
         },
         {
             symbol: '"',
-            escapedSymbol: 'quot',
-        },
+            escapedSymbol: 'quot'
+        }
     ];
 
     if (!isEmpty(value)) {

@@ -17,7 +17,7 @@
     "dist/**/*"
   ],
   "scripts": {
-    "build": "tsc && eslint . && vite build ",
+    "build": "tsc && eslint . --ext ts && vite build ",
     "test": "vitest run"
   },
   "repository": {
