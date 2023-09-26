@@ -1,0 +1,54 @@
+{
+  "name": "utils-ts",
+  "version": "1.0.0",
+  "description": "utilis for ts and js",
+  "main": "index.js",
+  "types": "./dist/src/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/src/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.umd.js",
+      "default": "./dist/index.umd.js"
+    },
+    "./style.css": "./dist/style.css"
+  },
+  "files": [
+    "dist/**/*"
+  ],
+  "scripts": {
+    "build": "tsc && eslint . && vite build ",
+    "test": "vitest run"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ankasru/codegen-js.git"
+  },
+  "keywords": [
+    "typescript",
+    "javascript",
+    "utils",
+    "helpers"
+  ],
+  "author": "ryinner",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ankasru/codegen-js/issues"
+  },
+  "homepage": "https://github.com/ankasru/codegen-js#readme",
+  "devDependencies": {
+    "@types/node": "^20.7.0",
+    "@typescript-eslint/eslint-plugin": "^6.7.3",
+    "eslint": "^8.50.0",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-config-standard-with-typescript": "^39.1.0",
+    "eslint-plugin-import": "^2.28.1",
+    "eslint-plugin-n": "^16.1.0",
+    "eslint-plugin-prettier": "^5.0.0",
+    "eslint-plugin-promise": "^6.1.1",
+    "typescript": "^5.2.2",
+    "vite": "^4.4.9",
+    "vite-plugin-dts": "^3.5.4",
+    "vitest": "^0.34.5"
+  }
+}
