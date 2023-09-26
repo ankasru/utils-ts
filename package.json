@@ -1,6 +1,6 @@
 {
   "name": "@ankasru/utils-ts",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "utils for ts and js",
   "main": "./dist/index.umd.js",
   "types": "./dist/src/index.d.ts",
@@ -22,7 +22,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ankasru/codegen-js.git"
+    "url": "git+https://github.com/ankasru/utils-ts"
   },
   "keywords": [
     "typescript",
@@ -33,9 +33,9 @@
   "author": "ryinner",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/ankasru/codegen-js/issues"
+    "url": "https://github.com/ankasru/utils-ts/issues"
   },
-  "homepage": "https://github.com/ankasru/codegen-js#readme",
+  "homepage": "https://github.com/ankasru/utils-ts#readme",
   "devDependencies": {
     "@types/node": "^20.7.0",
     "@typescript-eslint/eslint-plugin": "^6.7.3",
