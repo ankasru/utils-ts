@@ -7,5 +7,8 @@ export default mergeConfig(viteConfig, defineConfig({
         globals: false,
         environment: 'happy-dom',
         include: ['src/**/*.{test,spec}.{ts,tsx,mts,cts}'],
+        coverage: {
+            reporter: 'text'
+        }
     }
 }));

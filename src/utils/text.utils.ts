@@ -1,6 +1,6 @@
 import { isEmpty, type Nullable } from './helpers.utils';
 
-export function HTMLSwitcher ({ value, action = 'escape' }: { value: Nullable<string>; action: 'escape' | 'unescape' }): Nullable<string> {
+export function HTMLSwitcher (value: Nullable<string>, { action = 'unescape' }: { action: 'escape' | 'unescape' }): Nullable<string> {
     const HTMLEscapeValues = [
         {
             symbol: '&',
