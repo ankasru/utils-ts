@@ -10,8 +10,8 @@
         "sourceType": "module"
     },
     "extends": [
-        "standard-with-typescript",
-        "prettier"
+        "prettier",
+        "standard-with-typescript"
     ],
     "overrides": [
     ],

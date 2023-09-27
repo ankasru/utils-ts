@@ -19,3 +19,11 @@ export function getThisDate (): { day: number; numberInWeek: number; month: numb
         numberInWeek: now.getDay()
     };
 }
+
+export function plusTime (timestamp: string, { hours }: { hours?: number }): Date {
+    const date = new Date(timestamp);
+    if (!isEmpty(hours)) {
+        date.setHours(date.getHours() + <number> hours);
+    }
+    return date;
+}
