@@ -1,5 +1,3 @@
-import { isEmpty } from './helpers.utils';
-
 export function getOs (): OS {
     if (isWidows()) {
         return 'windows';
@@ -120,7 +118,8 @@ export async function readFromClipboard (): Promise<string | false> {
 }
 
 export function isClipboardSupported (): boolean {
-    if (isEmpty(window.navigator.clipboard)) {
+    // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
+    if (!window.navigator.clipboard) {
         console.warn('clipboard is not supported');
         return false;
     }
