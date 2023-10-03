@@ -50,7 +50,7 @@ function testUserAgent (platforms: RegExp): boolean {
 
 type OS = 'undetermined' | 'macos' | 'ios' | 'windows' | 'android' | 'linux';
 
-export function windowSizeType (): WindowSizes {
+export function getWindowSizeType (): WindowSizes {
     if (isBigDesktop()) {
         return 'big-desktop';
     }
@@ -94,7 +94,7 @@ export function isMobile (): boolean {
 
 type WindowSizes = 'mobile' | 'small-tablet' | 'tablet' | 'desktop' | 'big-desktop';
 
-export async function copyToClipboard (text: string): Promise<boolean> {
+export async function writeToClipboard (text: string): Promise<boolean> {
     if (!isClipboardSupported()) {
         return false;
     }
@@ -107,7 +107,7 @@ export async function copyToClipboard (text: string): Promise<boolean> {
     }
 }
 
-export async function getFromClipboard (): Promise<string | false> {
+export async function readFromClipboard (): Promise<string | false> {
     if (!isClipboardSupported()) {
         return false;
     }
@@ -119,7 +119,7 @@ export async function getFromClipboard (): Promise<string | false> {
     }
 }
 
-function isClipboardSupported (): boolean {
+export function isClipboardSupported (): boolean {
     if (isEmpty(window.navigator.clipboard)) {
         console.warn('clipboard is not supported');
         return false;
