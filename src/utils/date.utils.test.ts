@@ -1,13 +1,17 @@
 import { describe, expect, test } from 'vitest';
 import { convert, getThisDate, plusTime } from './date.utils';
 
+const locales = new Intl.Locale('ru', {
+    region: 'RU'
+});
+
 describe('convert', () => {
     test('without time', () => {
-        expect(convert('2022-10-10 10:10:10')).toEqual('10.10.2022');
+        expect(convert('2022-10-10 10:10:10', { locales })).toEqual('10.10.2022');
     });
 
     test('with time', () => {
-        expect(convert('2022-10-10 10:10:10', { time: true })).toEqual('10.10.2022, 10:10:10');
+        expect(convert('2022-10-10 10:10:10', { time: true, locales })).toEqual('10.10.2022, 10:10:10');
     });
 
     test('empty', () => {

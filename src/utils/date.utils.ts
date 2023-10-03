@@ -1,12 +1,12 @@
 import { isEmpty, type Nullable } from './helpers.utils';
 
-export function convert (timestamp: Nullable<string>, options?: { time: boolean }): Nullable<string> {
+export function convert (timestamp: Nullable<string>, options?: { time?: boolean; locales?: Intl.LocalesArgument }): Nullable<string> {
     if (isEmpty(timestamp)) {
         return timestamp;
     }
     const date = new Date(<string> timestamp);
 
-    return options?.time ?? false ? date.toLocaleString() : date.toLocaleDateString();
+    return options?.time ?? false ? date.toLocaleString(options?.locales) : date.toLocaleDateString(options?.locales);
 }
 
 export function getThisDate (): { day: number; numberInWeek: number; month: number; year: number } {
