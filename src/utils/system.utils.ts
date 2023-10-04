@@ -87,7 +87,7 @@ export function isSmallTablet (): boolean {
 }
 
 export function isMobile (): boolean {
-    return window.innerWidth >= MOBILE_SIZE && window.innerWidth <= SMALL_TABLET_SIZE;
+    return window.innerWidth <= SMALL_TABLET_SIZE;
 }
 
 type WindowSizes = 'mobile' | 'small-tablet' | 'tablet' | 'desktop' | 'big-desktop';
