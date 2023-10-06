@@ -137,7 +137,7 @@ export function parseCookies (): false | CookiesObject {
     const splittedCookies = document.cookie.split(/;/);
     splittedCookies.forEach(cookie => {
         const [name, value] = cookie.split(/=/);
-        cookies[name.trim()] = value.trim();
+        cookies[name.trim()] = value;
     });
 
     return cookies;
