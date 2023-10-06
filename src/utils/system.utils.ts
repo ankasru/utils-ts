@@ -125,3 +125,20 @@ export function isClipboardSupported (): boolean {
     }
     return true;
 }
+
+type CookiesObject = Record<string, string>;
+
+export function parseCookies (): false | CookiesObject {
+    if (!navigator.cookieEnabled) {
+        return false;
+    }
+
+    const cookies: CookiesObject = {};
+    const splittedCookies = document.cookie.split(/;/);
+    splittedCookies.forEach(cookie => {
+        const [name, value] = cookie.split(/=/);
+        cookies[name] = value;
+    });
+
+    return cookies;
+}

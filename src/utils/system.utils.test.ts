@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 import { afterEach, beforeEach, describe, expect, test, vi } from 'vitest';
-import { BIG_DESKTOP_SIZE, DESKTOP_SIZE, MOBILE_SIZE, SMALL_TABLET_SIZE, TABLET_SIZE, getOs, getWindowSizeType, isAndroid, isBigDesktop, isDesktop, isIos, isLinux, isMacOs, isMobile, isSmallTablet, isTablet, isWidows, readFromClipboard, writeToClipboard } from './system.utils';
+import { BIG_DESKTOP_SIZE, DESKTOP_SIZE, MOBILE_SIZE, SMALL_TABLET_SIZE, TABLET_SIZE, getOs, getWindowSizeType, isAndroid, isBigDesktop, isDesktop, isIos, isLinux, isMacOs, isMobile, isSmallTablet, isTablet, isWidows, parseCookies, readFromClipboard, writeToClipboard } from './system.utils';
 
 describe('os', () => {
     beforeEach(() => {
@@ -131,6 +131,34 @@ describe('clipboard', () => {
         window.navigator.clipboard.writeText = vi.fn().mockImplementation(async () => await Promise.reject(new Error('error')));
         expect(await readFromClipboard()).toBeFalsy();
         expect(await writeToClipboard('123')).toBeFalsy();
+    });
+
+    afterEach(() => {
+        vi.unstubAllGlobals();
+    });
+});
+
+describe('parse cookies', () => {
+    beforeEach(() => {
+        vi.stubGlobal('navigator', {
+            cookieEnabled: true
+        });
+    });
+
+    test('empty cookies', () => {
+        document.cookie = '';
+        expect(parseCookies()).toEqual({});
+    });
+
+    test('empty cookies', () => {
+        document.cookie = 'source_advert=1;';
+        expect(parseCookies()).toEqual({ source_advert: '1' });
+    });
+
+    test('cookies disable', () => {
+        // @ts-expect-error
+        navigator.cookieEnabled = false;
+        expect(parseCookies()).toEqual(false);
     });
 
     afterEach(() => {
