@@ -1,5 +1,5 @@
 import { describe, expect, test } from 'vitest';
-import { isEmpty } from './helpers.utils';
+import { isEmpty, toBoolean, toNumber } from './helpers.utils';
 
 describe('isEmpty', () => {
     test('object', () => {
@@ -33,5 +33,49 @@ describe('isEmpty', () => {
 
     test('undefined', () => {
         expect(isEmpty(undefined)).toBeTruthy();
+    });
+});
+
+describe('toNumber', () => {
+    test('string', () => {
+        expect(toNumber(1)).toEqual(1);
+    });
+
+    test('string', () => {
+        expect(toNumber('1,1')).toEqual(1.1);
+    });
+
+    test('boolean', () => {
+        expect(toNumber(true)).toEqual(1);
+        expect(toNumber(false)).toEqual(0);
+    });
+
+    test('NaN', () => {
+        expect(Number.isNaN(toNumber({ id: 1 }))).toBeTruthy();
+    });
+});
+
+describe('toBoolean', () => {
+    test('boolean', () => {
+        expect(toBoolean(true)).toBeTruthy();
+    });
+
+    test('string', () => {
+        expect(toBoolean('true')).toBeTruthy();
+        expect(toBoolean('abv')).toBeTruthy();
+        expect(toBoolean('false')).toBeFalsy();
+        expect(toBoolean('')).toBeFalsy();
+    });
+
+    test('number', () => {
+        expect(toBoolean(1)).toBeTruthy();
+        expect(toBoolean(0)).toBeFalsy();
+    });
+
+    test('default', () => {
+        expect(toBoolean([1])).toBeTruthy();
+        expect(toBoolean([])).toBeFalsy();
+        expect(toBoolean({ id: 1 })).toBeTruthy();
+        expect(toBoolean({})).toBeFalsy();
     });
 });
