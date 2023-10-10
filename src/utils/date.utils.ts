@@ -6,6 +6,10 @@ export function convert (timestamp: Nullable<string>, options?: { time?: boolean
     }
     const date = new Date(<string> timestamp);
 
+    if (Number.isNaN(date.getTime())) {
+        return '';
+    }
+
     return options?.time ?? false ? date.toLocaleString(options?.locales) : date.toLocaleDateString(options?.locales);
 }
 

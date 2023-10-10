@@ -17,6 +17,10 @@ describe('convert', () => {
     test('empty', () => {
         expect(convert('')).toEqual('');
     });
+
+    test('wrong date', () => {
+        expect(convert('0000-00-00 00:00:00')).toEqual('');
+    });
 });
 
 describe('getThisDate', () => {
