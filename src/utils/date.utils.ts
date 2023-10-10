@@ -6,14 +6,14 @@ export function convert (timestamp: Nullable<string>, options?: { time?: boolean
     }
     const date = new Date(<string> timestamp);
 
-    if (!isDateValid(date)) {
+    if (!isValid(date)) {
         return '';
     }
 
     return options?.time ?? false ? date.toLocaleString(options?.locales) : date.toLocaleDateString(options?.locales);
 }
 
-export function isDateValid (date: Date): boolean {
+export function isValid (date: Date): boolean {
     return !Number.isNaN(date.getTime());
 }
 

@@ -1,5 +1,5 @@
 import { describe, expect, test } from 'vitest';
-import { convert, getThisDate, isDateValid, plusTime } from './date.utils';
+import { convert, getThisDate, isValid, plusTime } from './date.utils';
 
 const locales = new Intl.Locale('ru', {
     region: 'RU'
@@ -23,13 +23,13 @@ describe('convert', () => {
     });
 });
 
-describe('isDateValid', () => {
+describe('isValid', () => {
     test('valid', () => {
-        expect(isDateValid(new Date())).toBeTruthy();
+        expect(isValid(new Date())).toBeTruthy();
     });
 
     test('invalid', () => {
-        expect(isDateValid(new Date('0000-00-00 00:00:00'))).toBeFalsy();
+        expect(isValid(new Date('0000-00-00 00:00:00'))).toBeFalsy();
     });
 });
 
