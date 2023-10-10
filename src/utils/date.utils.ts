@@ -6,11 +6,15 @@ export function convert (timestamp: Nullable<string>, options?: { time?: boolean
     }
     const date = new Date(<string> timestamp);
 
-    if (Number.isNaN(date.getTime())) {
+    if (!isDateValid(date)) {
         return '';
     }
 
     return options?.time ?? false ? date.toLocaleString(options?.locales) : date.toLocaleDateString(options?.locales);
+}
+
+export function isDateValid (date: Date): boolean {
+    return !Number.isNaN(date.getTime());
 }
 
 export function getThisDate (): { day: number; numberInWeek: number; month: number; year: number } {

@@ -1,5 +1,5 @@
 import { describe, expect, test } from 'vitest';
-import { convert, getThisDate, plusTime } from './date.utils';
+import { convert, getThisDate, isDateValid, plusTime } from './date.utils';
 
 const locales = new Intl.Locale('ru', {
     region: 'RU'
@@ -20,6 +20,16 @@ describe('convert', () => {
 
     test('wrong date', () => {
         expect(convert('0000-00-00 00:00:00')).toEqual('');
+    });
+});
+
+describe('isDateValid', () => {
+    test('valid', () => {
+        expect(isDateValid(new Date())).toBeTruthy();
+    });
+
+    test('invalid', () => {
+        expect(isDateValid(new Date('0000-00-00 00:00:00'))).toBeFalsy();
     });
 });
 
