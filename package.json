@@ -1,6 +1,6 @@
 {
   "name": "@ankasru/utils-ts",
-  "version": "1.0.13",
+  "version": "1.0.14",
   "description": "utils for ts and js",
   "main": "./dist/index.umd.js",
   "types": "./dist/src/index.d.ts",

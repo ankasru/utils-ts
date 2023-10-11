@@ -1,6 +1,6 @@
 export type Nullable<T> = T | undefined | null;
 
-export function isEmpty (value: unknown): boolean {
+export function isEmpty <T> (value: T): value is NonNullable<T> {
     switch (typeof value) {
         case 'string':
             return value.trim() === '';
