@@ -4,7 +4,7 @@ export function convert (timestamp: Nullable<string>, options?: { time?: boolean
     if (isEmpty(timestamp)) {
         return timestamp;
     }
-    const date = new Date(<string> timestamp);
+    const date = new Date(timestamp);
 
     if (!isValid(date)) {
         return '';
@@ -31,7 +31,7 @@ export function getThisDate (): { day: number; numberInWeek: number; month: numb
 export function plusTime (timestamp: string, { hours }: { hours?: number }): Date {
     const date = new Date(timestamp);
     if (!isEmpty(hours)) {
-        date.setHours(date.getHours() + <number> hours);
+        date.setHours(date.getHours() + hours);
     }
     return date;
 }

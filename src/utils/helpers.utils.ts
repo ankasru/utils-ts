@@ -1,5 +1,5 @@
-export type Nullable<T> = T & (undefined | null);
-type Empty<T> = Nullable<T> & ('' | { length: 0 });
+export type Nullable<T> = T | undefined | null;
+export type Empty<T> = T & (undefined | null | '' | { length: 0 });
 
 export function isEmpty <T> (value: T): value is Empty<T> {
     switch (typeof value) {
