@@ -3,6 +3,10 @@ import { isEmpty, type Nullable } from './helpers.utils';
 export function HTMLSwitcher (value: Nullable<string>, { action = 'unescape' }: { action: 'escape' | 'unescape' | 'remove' }): Nullable<string> {
     const HTMLEscapeValues = [
         {
+            symbol: '&',
+            escapedSymbol: 'amp'
+        },
+        {
             symbol: '<',
             escapedSymbol: 'lt'
         },
@@ -17,30 +21,33 @@ export function HTMLSwitcher (value: Nullable<string>, { action = 'unescape' }: 
         {
             symbol: '"',
             escapedSymbol: 'quot'
-        },
-        {
-            symbol: '&',
-            escapedSymbol: 'amp'
         }
     ];
 
     if (!isEmpty(value)) {
-        HTMLEscapeValues.forEach(escapeValue => {
-            const escapeReg = new RegExp(escapeValue.symbol, 'g');
-            const unescapeReg = new RegExp(`&${escapeValue.escapedSymbol};`, 'g');
-            switch (action) {
-                case 'escape':
-                    value = value?.replace(escapeReg, `&${escapeValue.escapedSymbol};`);
-                    break;
-                case 'remove':
-                    value = value?.replace(unescapeReg, '');
-                    value = value?.replace(escapeReg, '');
-                    break;
-                default:
-                    value = value?.replace(unescapeReg, escapeValue.symbol);
-                    break;
-            }
-        });
+        if (action === 'remove') {
+            HTMLEscapeValues.forEach(escapeValue => {
+                const unescapeReg = new RegExp(`&${escapeValue.escapedSymbol};`, 'g');
+                value = value?.replace(unescapeReg, escapeValue.symbol);
+            });
+            HTMLEscapeValues.forEach(escapeValue => {
+                const escapeReg = new RegExp(escapeValue.symbol, 'g');
+                value = value?.replace(escapeReg, '');
+            });
+        } else {
+            HTMLEscapeValues.forEach(escapeValue => {
+                const escapeReg = new RegExp(escapeValue.symbol, 'g');
+                const unescapeReg = new RegExp(`&${escapeValue.escapedSymbol};`, 'g');
+                switch (action) {
+                    case 'escape':
+                        value = value?.replace(escapeReg, `&${escapeValue.escapedSymbol};`);
+                        break;
+                    default:
+                        value = value?.replace(unescapeReg, escapeValue.symbol);
+                        break;
+                }
+            });
+        }
     }
     return value;
 }
