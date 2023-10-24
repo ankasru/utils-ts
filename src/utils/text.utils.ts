@@ -1,6 +1,6 @@
 import { isEmpty, type Nullable } from './helpers.utils';
 
-export function HTMLSwitcher (value: Nullable<string>, { action = 'unescape' }: { action: 'escape' | 'unescape' }): Nullable<string> {
+export function HTMLSwitcher (value: Nullable<string>, { action = 'unescape' }: { action: 'escape' | 'unescape' | 'remove' }): Nullable<string> {
     const HTMLEscapeValues = [
         {
             symbol: '&',
@@ -26,12 +26,19 @@ export function HTMLSwitcher (value: Nullable<string>, { action = 'unescape' }: 
 
     if (!isEmpty(value)) {
         HTMLEscapeValues.forEach(escapeValue => {
-            if (action === 'escape') {
-                const regExp = new RegExp(escapeValue.symbol, 'g');
-                value = value?.replace(regExp, `&${escapeValue.escapedSymbol};`);
-            } else {
-                const regExp = new RegExp(`&${escapeValue.escapedSymbol};`, 'g');
-                value = value?.replace(regExp, escapeValue.symbol);
+            const escapeReg = new RegExp(escapeValue.symbol, 'g');
+            const unescapeReg = new RegExp(`&${escapeValue.escapedSymbol};`, 'g');
+            switch (action) {
+                case 'escape':
+                    value = value?.replace(escapeReg, `&${escapeValue.escapedSymbol};`);
+                    break;
+                case 'remove':
+                    value = value?.replace(unescapeReg, '');
+                    value = value?.replace(escapeReg, '');
+                    break;
+                default:
+                    value = value?.replace(unescapeReg, escapeValue.symbol);
+                    break;
             }
         });
     }

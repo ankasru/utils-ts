@@ -10,6 +10,10 @@ describe('htmlSwitcher', () => {
         expect(HTMLSwitcher('&amp;', { action: 'unescape' })).toEqual('&');
     });
 
+    test('remove', () => {
+        expect(HTMLSwitcher('"a&amp;', { action: 'remove' })).toEqual('a');
+    });
+
     test('empty value', () => {
         expect(HTMLSwitcher('', { action: 'escape' })).toEqual('');
         expect(HTMLSwitcher(null, { action: 'escape' })).toEqual(null);
