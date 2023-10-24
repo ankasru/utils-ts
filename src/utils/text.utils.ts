@@ -3,10 +3,6 @@ import { isEmpty, type Nullable } from './helpers.utils';
 export function HTMLSwitcher (value: Nullable<string>, { action = 'unescape' }: { action: 'escape' | 'unescape' | 'remove' }): Nullable<string> {
     const HTMLEscapeValues = [
         {
-            symbol: '&',
-            escapedSymbol: 'amp'
-        },
-        {
             symbol: '<',
             escapedSymbol: 'lt'
         },
@@ -21,6 +17,10 @@ export function HTMLSwitcher (value: Nullable<string>, { action = 'unescape' }: 
         {
             symbol: '"',
             escapedSymbol: 'quot'
+        },
+        {
+            symbol: '&',
+            escapedSymbol: 'amp'
         }
     ];
 
