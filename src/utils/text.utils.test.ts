@@ -11,7 +11,7 @@ describe('htmlSwitcher', () => {
     });
 
     test('remove', () => {
-        expect(HTMLSwitcher('Жидкотопливный шланг G 1/4&amp;quot; - Rp 1/4&amp;&quot; 1000мм', { action: 'remove' })).toEqual('Жидкотопливный шланг G 1/4 - Rp 1/4 1000мм');
+        expect(HTMLSwitcher('"a&amp;', { action: 'remove' })).toEqual('a');
     });
 
     test('empty value', () => {
