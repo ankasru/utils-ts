@@ -25,6 +25,9 @@ export function HTMLSwitcher (value: Nullable<string>, { action = 'unescape' }: 
     ];
 
     if (!isEmpty(value)) {
+        if (action === 'remove') {
+            value = HTMLSwitcher(value, { action: 'unescape' });
+        }
         HTMLEscapeValues.forEach(escapeValue => {
             const escapeReg = new RegExp(escapeValue.symbol, 'g');
             const unescapeReg = new RegExp(`&${escapeValue.escapedSymbol};`, 'g');
@@ -33,7 +36,6 @@ export function HTMLSwitcher (value: Nullable<string>, { action = 'unescape' }: 
                     value = value?.replace(escapeReg, `&${escapeValue.escapedSymbol};`);
                     break;
                 case 'remove':
-                    value = value?.replace(unescapeReg, '');
                     value = value?.replace(escapeReg, '');
                     break;
                 default:

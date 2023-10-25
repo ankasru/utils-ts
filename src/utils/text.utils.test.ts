@@ -11,7 +11,7 @@ describe('htmlSwitcher', () => {
     });
 
     test('remove', () => {
-        expect(HTMLSwitcher('"a&amp;', { action: 'remove' })).toEqual('a');
+        expect(HTMLSwitcher('Жидкотопливный шланг Ecoflam Rp 1/4&amp;quot; - Rp 1/4&amp;quot;, 1000 мм, арт: 65323214.', { action: 'remove' })).toEqual('Жидкотопливный шланг Ecoflam Rp 1/4 - Rp 1/4, 1000 мм, арт: 65323214.');
     });
 
     test('empty value', () => {
