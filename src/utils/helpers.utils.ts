@@ -41,8 +41,10 @@ export function toBoolean (value: unknown): boolean {
         case 'string':
             switch (value) {
                 case 'true':
+                case '1':
                     return true;
                 case 'false':
+                case '0':
                     return false;
                 default:
                     return !isEmpty(value);
