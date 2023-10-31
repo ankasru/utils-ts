@@ -147,12 +147,56 @@ describe('parse cookies', () => {
 
     test('empty cookies', () => {
         document.cookie = '';
-        expect(parseCookies()).toEqual({});
+        const cookies = parseCookies();
+        if (cookies !== false) {
+            expect(cookies.getCookies('source_advert')).toEqual(undefined);
+        }
     });
 
-    test('empty cookies', () => {
+    test('not empty cookies', () => {
         document.cookie = 'source_advert=1;';
-        expect(parseCookies()).toEqual({ source_advert: '1' });
+        const cookies = parseCookies();
+        if (cookies !== false) {
+            expect(cookies.getCookies('source_advert')).toEqual('1');
+        }
+    });
+
+    test('set cookies', () => {
+        const cookies = parseCookies();
+        if (cookies !== false) {
+            cookies.setCookie({
+                name: 'source_advert',
+                value: '1'
+            });
+            cookies.setCookie({
+                name: 'source_advert',
+                value: '2',
+                expAt: '2022-10-10 00:00:00'
+            });
+            cookies.setCookie({
+                name: 'source_advert',
+                value: '2',
+                expAt: new Date()
+            });
+            cookies.setCookie({
+                name: 'source_advert',
+                value: '2',
+                expAt: { days: 2 }
+            });
+            expect(cookies.getCookies('source_advert')).toEqual('2');
+        }
+    });
+
+    test('remove cookies', () => {
+        const cookies = parseCookies();
+        if (cookies !== false) {
+            cookies.setCookie({
+                name: 'source_advert',
+                value: '1'
+            });
+            cookies.removeCookie('source_advert');
+            expect(cookies.getCookies('source_advert')).toEqual(undefined);
+        }
     });
 
     test('cookies disable', () => {

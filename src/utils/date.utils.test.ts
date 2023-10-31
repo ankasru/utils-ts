@@ -47,4 +47,20 @@ describe('plusTime', () => {
 
         expect(datePlusHours.getHours() - date.getHours()).toEqual(1);
     });
+
+    test('one day', () => {
+        const timestamp = '2022-10-10 00:00:00';
+        const date = new Date(timestamp);
+        const datePlusHours = plusTime(timestamp, { days: 1 });
+
+        expect(datePlusHours.getDate() - date.getDate()).toEqual(1);
+    });
+
+    test('one minuter', () => {
+        const timestamp = '2022-10-10 00:00:00';
+        const date = new Date(timestamp);
+        const datePlusHours = plusTime(timestamp, { minutes: 1 });
+
+        expect(datePlusHours.getMinutes() - date.getMinutes()).toEqual(1);
+    });
 });

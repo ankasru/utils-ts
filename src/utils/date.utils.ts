@@ -28,10 +28,37 @@ export function getThisDate (): { day: number; numberInWeek: number; month: numb
     };
 }
 
-export function plusTime (timestamp: string, { hours }: { hours?: number }): Date {
+export function plusTime (timestamp: string, { minutes, hours, days }: { minutes?: number; hours?: number; days?: number }): Date {
     const date = new Date(timestamp);
-    if (!isEmpty(hours)) {
-        date.setHours(date.getHours() + hours);
+    let plusValue = 0;
+
+    if (!isEmpty(minutes)) {
+        plusValue += minutesToMilliseconds(minutes);
     }
+    if (!isEmpty(hours)) {
+        plusValue += hoursToMilliseconds(hours);
+    }
+    if (!isEmpty(days)) {
+        plusValue += daysToMilliseconds(days);
+    }
+
+    date.setTime(date.getTime() + plusValue);
+
     return date;
+}
+
+function daysToMilliseconds (days: number): number {
+    return hoursToMilliseconds(days * 24);
+}
+
+function hoursToMilliseconds (hours: number): number {
+    return minutesToMilliseconds(hours * 60);
+}
+
+function minutesToMilliseconds (minutes: number): number {
+    return secondsToMilliseconds(minutes * 60);
+}
+
+function secondsToMilliseconds (seconds: number): number {
+    return seconds * 1000;
 }

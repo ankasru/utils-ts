@@ -1,3 +1,6 @@
+import { plusTime } from './date.utils';
+import { isEmpty } from './helpers.utils';
+
 export function getOs (): OS {
     if (isWidows()) {
         return 'windows';
@@ -126,19 +129,72 @@ export function isClipboardSupported (): boolean {
     return true;
 }
 
-type CookiesObject = Record<string, string>;
+// type CookiesObject = Record<string, string>;
 
 export function parseCookies (): false | CookiesObject {
     if (!navigator.cookieEnabled) {
         return false;
     }
 
-    const cookies: CookiesObject = {};
-    const splittedCookies = document.cookie.split(/;/);
-    splittedCookies.forEach(cookie => {
-        const [name, value] = cookie.split(/=/);
-        cookies[name.trim()] = value;
-    });
+    const cookies = new CookiesObject();
 
     return cookies;
+}
+
+class CookiesObject {
+    private readonly _cookies = new Map<string, string | undefined>();
+
+    constructor () {
+        this.parseCookies();
+    }
+
+    public getCookies (name: string): string | undefined {
+        if (!this._cookies.has(name)) {
+            this.parseCookies();
+        }
+        return this._cookies.get(name);
+    }
+
+    public removeCookie (name: string): void {
+        this.setCookie({ name, expAt: 'Thu, 01 Jan 1970 00:00:00 UTC' });
+
+        this._cookies.delete(name);
+    }
+
+    public setCookie ({ name: initialName, value, expAt, path = '/' }: CookiesSetSettings): void {
+        const name = initialName.trim();
+        this._cookies.set(name, value);
+
+        let newCookieString = `${name}=${value};path=${path};`;
+
+        if (!isEmpty(expAt)) {
+            let expDate = '';
+            if (typeof expAt === 'string') {
+                expDate = expAt;
+            } else if (expAt instanceof Date) {
+                expDate = expAt.toISOString();
+            } else {
+                expDate = plusTime((new Date()).toISOString(), expAt).toISOString();
+            }
+            newCookieString += `expires=${expDate};`;
+        }
+
+        document.cookie = newCookieString;
+    }
+
+    public parseCookies (): void {
+        this._cookies.clear();
+        const splittedCookies = document.cookie.split(/;/);
+        splittedCookies.forEach(cookie => {
+            const [name, value] = cookie.split(/=/);
+            this._cookies.set(name.trim(), value);
+        });
+    }
+}
+
+interface CookiesSetSettings {
+    name: string;
+    value?: string;
+    path?: string;
+    expAt?: Date | string | Parameters<typeof plusTime>[1];
 }
