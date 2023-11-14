@@ -149,7 +149,7 @@ describe('parse cookies', () => {
         document.cookie = '';
         const cookies = parseCookies();
         if (cookies !== false) {
-            expect(cookies.getCookies('source_advert')).toEqual(undefined);
+            expect(cookies.getCookie('source_advert')).toEqual(undefined);
         }
     });
 
@@ -157,7 +157,7 @@ describe('parse cookies', () => {
         document.cookie = 'source_advert=1;';
         const cookies = parseCookies();
         if (cookies !== false) {
-            expect(cookies.getCookies('source_advert')).toEqual('1');
+            expect(cookies.getCookie('source_advert')).toEqual('1');
         }
     });
 
@@ -183,7 +183,7 @@ describe('parse cookies', () => {
                 value: '2',
                 expAt: { days: 2 }
             });
-            expect(cookies.getCookies('source_advert')).toEqual('2');
+            expect(cookies.getCookie('source_advert')).toEqual('2');
         }
     });
 
@@ -195,7 +195,7 @@ describe('parse cookies', () => {
                 value: '1'
             });
             cookies.removeCookie('source_advert');
-            expect(cookies.getCookies('source_advert')).toEqual(undefined);
+            expect(cookies.getCookie('source_advert')).toEqual(undefined);
         }
     });
 

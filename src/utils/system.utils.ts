@@ -148,7 +148,7 @@ class CookiesObject {
         this.parseCookies();
     }
 
-    public getCookies (name: string): string | undefined {
+    public getCookie (name: string): string | undefined {
         if (!this._cookies.has(name)) {
             this.parseCookies();
         }
