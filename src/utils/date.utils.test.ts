@@ -1,5 +1,5 @@
 import { describe, expect, test } from 'vitest';
-import { convert, getThisDate, isValid, plusTime } from './date.utils';
+import { convert, getDiff, getThisDate, isValid, plusTime } from './date.utils';
 
 const locales = new Intl.Locale('ru', {
     region: 'RU'
@@ -62,5 +62,15 @@ describe('plusTime', () => {
         const datePlusHours = plusTime(timestamp, { minutes: 1 });
 
         expect(datePlusHours.getMinutes() - date.getMinutes()).toEqual(1);
+    });
+});
+
+describe('getDiff', () => {
+    test('one day less first', () => {
+        expect(getDiff(new Date('2023-01-02 00:00:00'), new Date('2023-01-03 00:00:00'))).equal(86400000);
+    });
+
+    test('one day more first', () => {
+        expect(getDiff(new Date('2023-01-03 00:00:00'), new Date('2023-01-02 00:00:00'))).equal(86400000);
     });
 });

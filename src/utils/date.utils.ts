@@ -1,5 +1,7 @@
 import { isEmpty, type Nullable } from './helpers.utils';
 
+type DateInput = string | number | Date;
+
 export function convert (timestamp: Nullable<string>, options?: { time?: boolean; locales?: Intl.LocalesArgument }): Nullable<string> {
     if (isEmpty(timestamp)) {
         return timestamp;
@@ -28,7 +30,14 @@ export function getThisDate (): { day: number; numberInWeek: number; month: numb
     };
 }
 
-export function plusTime (timestamp: string, { minutes, hours, days }: { minutes?: number; hours?: number; days?: number }): Date {
+export function getDiff (date: DateInput, date2: DateInput): number {
+    const dateFirst = new Date(date).getTime();
+    const dateSecond = new Date(date2).getTime();
+
+    return Math.abs(dateFirst - dateSecond);
+}
+
+export function plusTime (timestamp: DateInput, { minutes, hours, days }: { minutes?: number; hours?: number; days?: number }): Date {
     const date = new Date(timestamp);
     let plusValue = 0;
 
