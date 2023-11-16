@@ -56,18 +56,18 @@ export function plusTime (timestamp: DateInput, { minutes, hours, days }: { minu
     return date;
 }
 
-function daysToMilliseconds (days: number): number {
+export function daysToMilliseconds (days: number): number {
     return hoursToMilliseconds(days * 24);
 }
 
-function hoursToMilliseconds (hours: number): number {
+export function hoursToMilliseconds (hours: number): number {
     return minutesToMilliseconds(hours * 60);
 }
 
-function minutesToMilliseconds (minutes: number): number {
+export function minutesToMilliseconds (minutes: number): number {
     return secondsToMilliseconds(minutes * 60);
 }
 
-function secondsToMilliseconds (seconds: number): number {
+export function secondsToMilliseconds (seconds: number): number {
     return seconds * 1000;
 }

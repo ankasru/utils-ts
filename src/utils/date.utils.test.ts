@@ -1,5 +1,5 @@
 import { describe, expect, test } from 'vitest';
-import { convert, getDiff, getThisDate, isValid, plusTime } from './date.utils';
+import { convert, daysToMilliseconds, getDiff, getThisDate, hoursToMilliseconds, isValid, minutesToMilliseconds, plusTime, secondsToMilliseconds } from './date.utils';
 
 const locales = new Intl.Locale('ru', {
     region: 'RU'
@@ -67,10 +67,28 @@ describe('plusTime', () => {
 
 describe('getDiff', () => {
     test('one day less first', () => {
-        expect(getDiff(new Date('2023-01-02 00:00:00'), new Date('2023-01-03 00:00:00'))).equal(86400000);
+        expect(getDiff(new Date('2023-01-02 00:00:00'), new Date('2023-01-03 00:00:00'))).equal(daysToMilliseconds(1));
     });
 
     test('one day more first', () => {
-        expect(getDiff(new Date('2023-01-03 00:00:00'), new Date('2023-01-02 00:00:00'))).equal(86400000);
+        expect(getDiff(new Date('2023-01-03 00:00:00'), new Date('2023-01-02 00:00:00'))).equal(daysToMilliseconds(1));
+    });
+});
+
+describe('to milliseconds', () => {
+    test('days to milliseconds', () => {
+        expect(daysToMilliseconds(1)).equal(86400000);
+    });
+
+    test('hours to milliseconds', () => {
+        expect(hoursToMilliseconds(1)).equal(3600000);
+    });
+
+    test('minutes to milliseconds', () => {
+        expect(minutesToMilliseconds(1)).equal(60000);
+    });
+
+    test('seconds to milliseconds', () => {
+        expect(secondsToMilliseconds(1)).equal(1000);
     });
 });
