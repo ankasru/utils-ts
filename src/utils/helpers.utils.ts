@@ -9,7 +9,7 @@ export function isEmpty <T> (value: T): value is Empty<T> {
             if (Array.isArray(value)) {
                 return value.length === 0;
             }
-            return value === null || Object.keys(value).length === 0;
+            return value === null || JSON.stringify(value) === '{}';
         default:
             return value === undefined;
     }
