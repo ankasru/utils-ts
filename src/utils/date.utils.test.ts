@@ -1,5 +1,5 @@
 import { describe, expect, test } from 'vitest';
-import { convert, daysToMilliseconds, getDiff, getThisDate, hoursToMilliseconds, isValid, minutesToMilliseconds, monthsToMilliseconds, plusTime, secondsToMilliseconds, weeksToMilliseconds } from './date.utils';
+import { convert, daysToMilliseconds, getDiff, getThisDate, hoursToMilliseconds, isValid, minutesToMilliseconds, monthsToMilliseconds, plusTime, secondsToMilliseconds, weeksToMilliseconds, yearsToMilliseconds } from './date.utils';
 
 const locales = new Intl.Locale('ru', {
     region: 'RU'
@@ -40,42 +40,40 @@ describe('getThisDate', () => {
 });
 
 describe('plusTime', () => {
+    const date = new Date('2022-10-10 00:00:00');
+
+    test('one year', () => {
+        const datePlusHours = plusTime(date, { years: 1 });
+
+        expect(datePlusHours.getFullYear() - date.getFullYear()).toEqual(1);
+    });
+
     test('one month', () => {
-        const timestamp = '2022-10-10 00:00:00';
-        const date = new Date(timestamp);
-        const datePlusHours = plusTime(timestamp, { months: 1 });
+        const datePlusHours = plusTime(date, { months: 1 });
 
         expect(datePlusHours.getMonth() - date.getMonth()).toEqual(1);
     });
 
     test('one week', () => {
-        const timestamp = '2022-10-10 00:00:00';
-        const date = new Date(timestamp);
-        const datePlusHours = plusTime(timestamp, { weeks: 1 });
+        const datePlusHours = plusTime(date, { weeks: 1 });
 
         expect(datePlusHours.getDate() - date.getDate()).toEqual(7);
     });
 
     test('one day', () => {
-        const timestamp = '2022-10-10 00:00:00';
-        const date = new Date(timestamp);
-        const datePlusHours = plusTime(timestamp, { days: 1 });
+        const datePlusHours = plusTime(date, { days: 1 });
 
         expect(datePlusHours.getDate() - date.getDate()).toEqual(1);
     });
 
     test('one hour', () => {
-        const timestamp = '2022-10-10 00:00:00';
-        const date = new Date(timestamp);
-        const datePlusHours = plusTime(timestamp, { hours: 1 });
+        const datePlusHours = plusTime(date, { hours: 1 });
 
         expect(datePlusHours.getHours() - date.getHours()).toEqual(1);
     });
 
     test('one minute', () => {
-        const timestamp = '2022-10-10 00:00:00';
-        const date = new Date(timestamp);
-        const datePlusHours = plusTime(timestamp, { minutes: 1 });
+        const datePlusHours = plusTime(date, { minutes: 1 });
 
         expect(datePlusHours.getMinutes() - date.getMinutes()).toEqual(1);
     });
@@ -92,6 +90,10 @@ describe('getDiff', () => {
 });
 
 describe('to milliseconds', () => {
+    test('years to milliseconds', () => {
+        expect(yearsToMilliseconds(1)).equal(29030400000);
+    });
+
     test('months to milliseconds', () => {
         expect(monthsToMilliseconds(1)).equal(2419200000);
     });

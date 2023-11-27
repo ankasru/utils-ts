@@ -54,13 +54,15 @@ export function plusTime (
         hours,
         days,
         weeks,
-        months
+        months,
+        years
     }: {
         minutes?: number;
         hours?: number;
         days?: number;
         weeks?: number;
         months?: number;
+        years?: number;
     }
 ): Date {
     const date = new Date(timestamp);
@@ -81,10 +83,17 @@ export function plusTime (
     if (!isEmpty(months)) {
         plusValue += monthsToMilliseconds(months);
     }
+    if (!isEmpty(years)) {
+        plusValue += yearsToMilliseconds(years);
+    }
 
     date.setTime(date.getTime() + plusValue);
 
     return date;
+}
+
+export function yearsToMilliseconds (years: number): number {
+    return monthsToMilliseconds(years * 12);
 }
 
 export function monthsToMilliseconds (months: number): number {
