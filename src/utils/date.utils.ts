@@ -2,7 +2,10 @@ import { isEmpty, type Nullable } from './helpers.utils';
 
 type DateInput = string | number | Date;
 
-export function convert (timestamp: Nullable<string>, options?: { time?: boolean; locales?: Intl.LocalesArgument }): Nullable<string> {
+export function convert (
+    timestamp: Nullable<string>,
+    options?: { time?: boolean; locales?: Intl.LocalesArgument }
+): Nullable<string> {
     if (isEmpty(timestamp)) {
         return timestamp;
     }
@@ -12,14 +15,21 @@ export function convert (timestamp: Nullable<string>, options?: { time?: boolean
         return '';
     }
 
-    return options?.time ?? false ? date.toLocaleString(options?.locales) : date.toLocaleDateString(options?.locales);
+    return options?.time ?? false
+        ? date.toLocaleString(options?.locales)
+        : date.toLocaleDateString(options?.locales);
 }
 
 export function isValid (date: Date): boolean {
     return !Number.isNaN(date.getTime());
 }
 
-export function getThisDate (): { day: number; numberInWeek: number; month: number; year: number } {
+export function getThisDate (): {
+    day: number;
+    numberInWeek: number;
+    month: number;
+    year: number;
+} {
     const now = new Date();
 
     return {
@@ -37,7 +47,22 @@ export function getDiff (date: DateInput, date2: DateInput): number {
     return Math.abs(dateFirst - dateSecond);
 }
 
-export function plusTime (timestamp: DateInput, { minutes, hours, days, weeks }: { minutes?: number; hours?: number; days?: number; weeks?: number }): Date {
+export function plusTime (
+    timestamp: DateInput,
+    {
+        minutes,
+        hours,
+        days,
+        weeks,
+        months
+    }: {
+        minutes?: number;
+        hours?: number;
+        days?: number;
+        weeks?: number;
+        months?: number;
+    }
+): Date {
     const date = new Date(timestamp);
     let plusValue = 0;
 
@@ -53,10 +78,17 @@ export function plusTime (timestamp: DateInput, { minutes, hours, days, weeks }:
     if (!isEmpty(weeks)) {
         plusValue += weeksToMilliseconds(weeks);
     }
+    if (!isEmpty(months)) {
+        plusValue += monthsToMilliseconds(months);
+    }
 
     date.setTime(date.getTime() + plusValue);
 
     return date;
+}
+
+export function monthsToMilliseconds (months: number): number {
+    return weeksToMilliseconds(months * 4);
 }
 
 export function weeksToMilliseconds (weeks: number): number {
