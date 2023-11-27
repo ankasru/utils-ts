@@ -1,5 +1,5 @@
 import { describe, expect, test } from 'vitest';
-import { convert, daysToMilliseconds, getDiff, getThisDate, hoursToMilliseconds, isValid, minutesToMilliseconds, plusTime, secondsToMilliseconds } from './date.utils';
+import { convert, daysToMilliseconds, getDiff, getThisDate, hoursToMilliseconds, isValid, minutesToMilliseconds, plusTime, secondsToMilliseconds, weeksToMilliseconds } from './date.utils';
 
 const locales = new Intl.Locale('ru', {
     region: 'RU'
@@ -40,6 +40,14 @@ describe('getThisDate', () => {
 });
 
 describe('plusTime', () => {
+    test('one week', () => {
+        const timestamp = '2022-10-10 00:00:00';
+        const date = new Date(timestamp);
+        const datePlusHours = plusTime(timestamp, { weeks: 1 });
+
+        expect(datePlusHours.getDate() - date.getDate()).toEqual(7);
+    });
+
     test('one hour', () => {
         const timestamp = '2022-10-10 00:00:00';
         const date = new Date(timestamp);
@@ -56,7 +64,7 @@ describe('plusTime', () => {
         expect(datePlusHours.getDate() - date.getDate()).toEqual(1);
     });
 
-    test('one minuter', () => {
+    test('one minute', () => {
         const timestamp = '2022-10-10 00:00:00';
         const date = new Date(timestamp);
         const datePlusHours = plusTime(timestamp, { minutes: 1 });
@@ -76,6 +84,10 @@ describe('getDiff', () => {
 });
 
 describe('to milliseconds', () => {
+    test('weeks to milliseconds', () => {
+        expect(weeksToMilliseconds(1)).equal(604800000);
+    });
+
     test('days to milliseconds', () => {
         expect(daysToMilliseconds(1)).equal(86400000);
     });

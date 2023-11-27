@@ -37,7 +37,7 @@ export function getDiff (date: DateInput, date2: DateInput): number {
     return Math.abs(dateFirst - dateSecond);
 }
 
-export function plusTime (timestamp: DateInput, { minutes, hours, days }: { minutes?: number; hours?: number; days?: number }): Date {
+export function plusTime (timestamp: DateInput, { minutes, hours, days, weeks }: { minutes?: number; hours?: number; days?: number; weeks?: number }): Date {
     const date = new Date(timestamp);
     let plusValue = 0;
 
@@ -50,10 +50,17 @@ export function plusTime (timestamp: DateInput, { minutes, hours, days }: { minu
     if (!isEmpty(days)) {
         plusValue += daysToMilliseconds(days);
     }
+    if (!isEmpty(weeks)) {
+        plusValue += weeksToMilliseconds(weeks);
+    }
 
     date.setTime(date.getTime() + plusValue);
 
     return date;
+}
+
+export function weeksToMilliseconds (weeks: number): number {
+    return daysToMilliseconds(weeks * 7);
 }
 
 export function daysToMilliseconds (days: number): number {
