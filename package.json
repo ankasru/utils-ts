@@ -28,7 +28,9 @@
     "typescript",
     "javascript",
     "utils",
-    "helpers"
+    "helpers",
+    "async",
+    "debounce"
   ],
   "author": "ryinner",
   "license": "MIT",
