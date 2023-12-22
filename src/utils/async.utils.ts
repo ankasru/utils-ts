@@ -2,7 +2,7 @@ export async function wait (ms: number): Promise<void> {
     await new Promise(resolve => { setTimeout(resolve, ms); });
 }
 
-export default function debounce <T extends (...args: unknown[]) => unknown> ({ callback, timeout = 300 }: { callback: T; timeout?: number }): (...args: Parameters<T>) => Promise<ReturnType<T>> {
+export function debounce <T extends (...args: any[]) => any> ({ callback, timeout = 300 }: { callback: T; timeout?: number }): (...args: Parameters<T>) => Promise<ReturnType<T>> {
     let timer: ReturnType<typeof setTimeout> | undefined;
 
     const debounced = async (...args: Parameters<T>): Promise<ReturnType<T>> => {
