@@ -1,5 +1,5 @@
 import { afterEach, beforeEach, describe, expect, test, vi } from 'vitest';
-import { debounce, wait } from './async.utils';
+import { debounce, throttle, wait } from './async.utils';
 
 describe('wait', () => {
     beforeEach(() => {
@@ -30,6 +30,27 @@ describe('wait', () => {
         vi.advanceTimersByTime(300);
 
         expect(spy).toHaveBeenCalledOnce();
+    });
+
+    test('throttle', async () => {
+        const spy = vi.spyOn(window, 'setTimeout');
+
+        const func = throttle({
+            callback (a: number) {
+                return a;
+            },
+            timeout: 300
+        });
+        void func(1);
+        void func(2);
+        void func(3);
+        vi.advanceTimersByTime(300);
+
+        expect(spy).toHaveBeenCalledOnce();
+
+        void func(4);
+        vi.advanceTimersByTime(300);
+        expect(spy).toHaveBeenCalledTimes(2);
     });
 
     afterEach(() => {
