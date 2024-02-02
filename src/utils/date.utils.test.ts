@@ -91,7 +91,7 @@ describe('getDiff', () => {
 
 describe('to milliseconds', () => {
     test('years to milliseconds', () => {
-        expect(yearsToMilliseconds(1)).equal(29030400000);
+        expect(yearsToMilliseconds(1)).equal(31536000000);
     });
 
     test('months to milliseconds', () => {

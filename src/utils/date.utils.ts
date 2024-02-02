@@ -93,7 +93,7 @@ export function plusTime (
 }
 
 export function yearsToMilliseconds (years: number): number {
-    return monthsToMilliseconds(years * 12);
+    return daysToMilliseconds(years * 365);
 }
 
 export function monthsToMilliseconds (months: number): number {

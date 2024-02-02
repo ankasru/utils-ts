@@ -2,19 +2,30 @@ import { afterEach, beforeEach, describe, expect, test, vi } from 'vitest';
 import { isLocal, open } from './url.utils';
 
 describe('isLocal', () => {
+    beforeEach(() => {
+        vi.stubGlobal('window', {
+            location: {
+                host: 'ankas.local'
+            }
+        });
+    });
+
     test('local', () => {
-        location.replace(new URL('http://ankas.local'));
         expect(isLocal()).toBeTruthy();
     });
 
     test('test', () => {
-        location.replace(new URL('http://ankas.test'));
+        window.location.host = 'ankas.test';
         expect(isLocal()).toBeTruthy();
     });
 
     test('noLocal', () => {
-        location.replace(new URL('http://ankas.ru'));
+        window.location.host = 'ankas.ru';
         expect(isLocal()).toBeFalsy();
+    });
+
+    afterEach(() => {
+        vi.unstubAllGlobals();
     });
 });
 
