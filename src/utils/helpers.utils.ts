@@ -1,5 +1,8 @@
 export type Nullable<T> = T | undefined | null;
 export type Empty<T> = T & (undefined | null | '' | { length: 0 });
+export type Callback <T extends CallbackGeneric> = (...args: Parameters<T>) => any;
+export type CallbackGeneric = (...args: any[]) => any;
+export type CallbackGenericAsync = (...args: any[]) => Promise<any>;
 
 export function isEmpty <T> (value: T): value is Empty<T> {
     switch (typeof value) {
@@ -51,5 +54,21 @@ export function toBoolean (value: unknown): boolean {
             }
         default:
             return !isEmpty(value);
+    }
+}
+
+export function tryOrNull <T extends CallbackGeneric | CallbackGenericAsync> (callback: T): ReturnType<T> | null {
+    try {
+        return callback();
+    } catch (err) {
+        return null;
+    }
+}
+
+export async function tryOrNullAsync <T extends CallbackGenericAsync> (callback: T): Promise<Awaited<ReturnType<T>> | null> {
+    try {
+        return await callback();
+    } catch (err) {
+        return null;
     }
 }

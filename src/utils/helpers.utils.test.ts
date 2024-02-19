@@ -1,5 +1,5 @@
 import { describe, expect, test } from 'vitest';
-import { isEmpty, toBoolean, toNumber } from './helpers.utils';
+import { isEmpty, toBoolean, toNumber, tryOrNull, tryOrNullAsync } from './helpers.utils';
 
 describe('isEmpty', () => {
     test('object', () => {
@@ -77,5 +77,23 @@ describe('toBoolean', () => {
         expect(toBoolean([])).toBeFalsy();
         expect(toBoolean({ id: 1 })).toBeTruthy();
         expect(toBoolean({})).toBeFalsy();
+    });
+});
+
+describe('tryOrNull', () => {
+    test('return null', () => {
+        expect(tryOrNull(() => JSON.parse('{WRONGJSONCODE}'))).toBe(null);
+    });
+
+    test('return string', () => {
+        expect(tryOrNull(() => JSON.parse('"JSONCODE"'))).toBe('JSONCODE');
+    });
+
+    test('return async null', async () => {
+        expect(await tryOrNullAsync(async () => await Promise.resolve(JSON.parse('{WRONGJSONCODE}')))).toBe(null);
+    });
+
+    test('return async string', async () => {
+        expect(await tryOrNullAsync(async () => await Promise.resolve(JSON.parse('"JSONCODE"')))).toBe('JSONCODE');
     });
 });

@@ -1,3 +1,5 @@
+import type { Callback, CallbackGeneric } from './helpers.utils';
+
 export async function wait (ms: number): Promise<void> {
     await new Promise(resolve => { setTimeout(resolve, ms); });
 }
@@ -33,7 +35,3 @@ export function throttle <T extends CallbackGeneric> ({ callback, timeout = 300 
 
     return throttled;
 }
-
-type Callback <T extends CallbackGeneric> = (...args: Parameters<T>) => any;
-
-type CallbackGeneric = (...args: any[]) => any;
