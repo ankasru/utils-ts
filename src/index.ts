@@ -6,5 +6,6 @@ import * as helpers from './utils/helpers.utils';
 import * as system from './utils/system.utils';
 import * as text from './utils/text.utils';
 import * as url from './utils/url.utils';
+import * as number from './utils/number.utils';
 
-export { array, async, date, helpers, system, text, url };
+export { array, async, date, helpers, system, text, url, number };

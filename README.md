@@ -4,6 +4,24 @@ typescript | javascript utils
 
 ## Utils types
 
+### number.formatFactory
+
+Function for formatting a number.
+
+Based by [Intl.NumberFormat](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat).
+
+Expect settings object.
+
+```typescript
+const enFormat = number.formatFactory({
+    lang: 'en-US',
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2
+});
+
+console.log(enFormat('123, 123')) // returns 123.23
+```
+
 ### async.wait
 
 Function for wait time in [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise).
