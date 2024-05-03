@@ -22,7 +22,7 @@
     ],
     "rules": {
         "@typescript-eslint/key-spacing": "warn",
-        "@typescript-eslint/indent": ["error", 4, {"SwitchCase": 1}],
+        "@typescript-eslint/indent": ["error", 2, {"SwitchCase": 1}],
         "@typescript-eslint/semi": ["error", "always"],
         "@typescript-eslint/member-delimiter-style": ["error", {
             "multiline": {
@@ -35,6 +35,8 @@
             }
         }],
         "@typescript-eslint/consistent-type-assertions": ["error", {"assertionStyle": "angle-bracket"}],
-        "@typescript-eslint/restrict-template-expressions": "off"
+        "@typescript-eslint/restrict-template-expressions": "off",
+        "@typescript-eslint/space-before-function-paren": "off",
+        "@typescript-eslint/comma-dangle": "off"
     }
 }
