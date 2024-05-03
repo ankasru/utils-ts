@@ -257,6 +257,14 @@ cookies.setCookie({
 cookies.parseCookies(); // update cookies object
 ```
 
+### system.canUseDom
+
+Function for checking window in ssr.
+
+```typescript
+canUseDom();
+```
+
 ### text.generateHash
 
 Function generate random string.
