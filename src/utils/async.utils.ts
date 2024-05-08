@@ -21,11 +21,16 @@ export function debounce<T extends CallbackGeneric>({
 
   const debounced = async (...args: Parameters<T>): Promise<ReturnType<T>> => {
     return await new Promise<ReturnType<T>>((resolve) => {
-      clearTimeout(timer);
-      timer = setTimeout(() => {
-        // eslint-disable-next-line n/no-callback-literal
+      if (timer !== undefined) {
+        clearTimeout(timer);
+        timer = setTimeout(() => {
+          // eslint-disable-next-line n/no-callback-literal
+          resolve(<ReturnType<T>>callback(...args));
+        }, timeout);
+      } else {
         resolve(<ReturnType<T>>callback(...args));
-      }, timeout);
+        timer = setTimeout(() => {}, timeout);
+      }
     });
   };
 
