@@ -26,6 +26,7 @@ export function debounce<T extends CallbackGeneric>({
         timer = setTimeout(() => {
           // eslint-disable-next-line n/no-callback-literal
           resolve(<ReturnType<T>>callback(...args));
+          timer = undefined;
         }, timeout);
       } else {
         resolve(<ReturnType<T>>callback(...args));
