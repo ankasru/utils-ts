@@ -48,6 +48,7 @@ Expect object argument:
 
 - callback - function, which be called with debounce;
 - timeout - number of milliseconds after which function will be called, updates after interact with function;
+- initialInvoke - call callback if timer is not started;
 
 ```typescript
 const search = async.debounce({

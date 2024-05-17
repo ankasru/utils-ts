@@ -13,15 +13,17 @@ export async function wait(ms: number): Promise<void> {
 export function debounce<T extends CallbackGeneric>({
   callback,
   timeout = 300,
+  initialInvoke,
 }: {
   callback: T;
   timeout?: number;
+  initialInvoke?: boolean;
 }): Callback<T> {
   let timer: ReturnType<typeof setTimeout> | undefined;
 
   const debounced = async (...args: Parameters<T>): Promise<ReturnType<T>> => {
     return await new Promise<ReturnType<T>>((resolve) => {
-      if (timer !== undefined) {
+      if (timer !== undefined || !(initialInvoke ?? false)) {
         clearTimeout(timer);
         timer = setTimeout(() => {
           // eslint-disable-next-line n/no-callback-literal
