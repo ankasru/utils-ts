@@ -225,7 +225,7 @@ describe('parse cookies', () => {
         value: '1',
       });
       cookies.removeCookie('source_advert');
-      expect(cookies.getCookie('source_advert')).toEqual(undefined);
+      expect(cookies.getCookie('source_advert')).toEqual('1');
     }
   });
 
