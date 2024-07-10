@@ -15,8 +15,10 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 20
-      - run: npm ci
-      - run: npm test
+      - uses: borales/actions-yarn@v4
+        with:
+          cmd: install --frozen-lockfile && test
+      - run: npm run test
 
   publish-npm:
     needs: build
@@ -27,7 +29,9 @@ jobs:
         with:
           node-version: 20
           registry-url: https://registry.npmjs.org/
-      - run: npm ci
+      - uses: borales/actions-yarn@v4
+        with:
+          cmd: install --frozen-lockfile
       - run: npm run build
       - run: npm publish --access public
         env:
