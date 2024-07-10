@@ -2,8 +2,11 @@ export type Nullable<T> = T | undefined | null;
 export type Empty<T> = T & (undefined | null | '' | { length: 0 });
 export type Callback<T extends CallbackGeneric> = (
   ...args: Parameters<T>
-) => any;
+) => // eslint-disable-next-line @typescript-eslint/no-explicit-any
+any;
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type CallbackGeneric = (...args: any[]) => any;
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type CallbackGenericAsync = (...args: any[]) => Promise<any>;
 
 export function isEmpty<T>(value: T): value is Empty<T> {

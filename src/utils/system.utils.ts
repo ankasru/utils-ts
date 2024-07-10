@@ -128,15 +128,12 @@ export async function readFromClipboard(): Promise<string | false> {
 }
 
 export function isClipboardSupported(): boolean {
-  // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
   if (!window.navigator.clipboard) {
     console.warn('clipboard is not supported');
     return false;
   }
   return true;
 }
-
-// type CookiesObject = Record<string, string>;
 
 export function parseCookies(): false | CookiesObject {
   if (!navigator.cookieEnabled) {

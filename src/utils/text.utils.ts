@@ -50,7 +50,7 @@ export function HTMLSwitcher(
   return value;
 }
 
-export function generateHash(length: number = 6): string {
+export function generateHash(length = 6): string {
   const possible =
     'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
   const hash: string[] = [];

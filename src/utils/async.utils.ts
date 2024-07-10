@@ -1,7 +1,7 @@
 import {
   toBoolean,
-  type Callback,
   type CallbackGeneric,
+  type Callback,
 } from './helpers.utils';
 
 export async function wait(ms: number): Promise<void> {
@@ -26,12 +26,12 @@ export function debounce<T extends CallbackGeneric>({
       if (timer !== undefined || !(initialInvoke ?? false)) {
         clearTimeout(timer);
         timer = setTimeout(() => {
-          // eslint-disable-next-line n/no-callback-literal
           resolve(<ReturnType<T>>callback(...args));
           timer = undefined;
         }, timeout);
       } else {
         resolve(<ReturnType<T>>callback(...args));
+        // eslint-disable-next-line @typescript-eslint/no-empty-function
         timer = setTimeout(() => {}, timeout);
       }
     });
@@ -52,7 +52,6 @@ export function throttle<T extends CallbackGeneric>({
   const throttled: Callback<T> = async (...args) => {
     return await new Promise<ReturnType<T>>((resolve) => {
       if (timer === undefined || timer === null) {
-        // eslint-disable-next-line n/no-callback-literal
         resolve(<ReturnType<T>>callback(...args));
         timer = setTimeout(() => {
           clearTimeout(timer);

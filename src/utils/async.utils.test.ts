@@ -56,6 +56,7 @@ describe('wait', () => {
   test('setCustomInterval base', () => {
     const spy = vi.spyOn(window, 'setInterval');
 
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
     setCustomInterval(() => {}, 1000);
 
     vi.advanceTimersByTime(1000);
