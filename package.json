@@ -16,7 +16,7 @@
     "dist/**/*"
   ],
   "scripts": {
-    "build": "tsc && eslint . --ext ts && vite build ",
+    "build": "rm -R dist && eslint && tsc && vite build ",
     "test": "vitest run",
     "test-coverage": "vitest run --coverage"
   },
